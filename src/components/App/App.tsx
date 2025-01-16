@@ -1,7 +1,13 @@
+import EventForm from "../EventForm/EventForm.tsx";
+
 type AppProps = {};
 
 const App = () => {
-  return <div>App</div>;
+  return (
+    <div>
+      <EventForm />
+    </div>
+  );
 };
 
 export default App;
