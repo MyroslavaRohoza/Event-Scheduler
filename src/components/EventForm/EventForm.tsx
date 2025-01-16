@@ -1,7 +1,7 @@
 import React from "react";
 import {  Field, Form, ErrorMessage, Formik } from "formik";
 
-// Типизация значений формы
+
 type EventValues = {
   title: string;
   date: string;
@@ -56,9 +56,9 @@ const EventForm: React.FC = () => {
           <label htmlFor="category">Category:</label>
           <Field as="select" id="category" name="category" required>
             <option value="">Select category</option>
-            {categories.map((cat) => (
-              <option key={cat.value} value={cat.value}>
-                {cat.label}
+            {categories.map((category) => (
+              <option key={category.value} value={category.value}>
+                {category.label}
               </option>
             ))}
           </Field>
