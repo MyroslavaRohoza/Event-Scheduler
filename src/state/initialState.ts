@@ -1,6 +1,6 @@
 export const initiaState = {
   events: {
-    items: [],
+    eventList: [],
     loading: false,
     error: null
   },
