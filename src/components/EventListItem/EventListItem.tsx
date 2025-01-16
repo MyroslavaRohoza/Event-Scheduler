@@ -1,9 +1,13 @@
-import React from 'react'
-
-const eventListItem = () => {
+const EventListItem = ({ title, category, time, date, description }) => {
   return (
-    <div>eventListItem</div>
-  )
-}
+    <li>
+      <span>{title}</span>
+      <span>{category}</span>
+      <span>{time}</span>
+      <span>{date}</span>
+      <p>{description}</p>
+    </li>
+  );
+};
 
-export default eventListItem
+export default EventListItem;
