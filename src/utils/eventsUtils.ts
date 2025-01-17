@@ -1,19 +1,24 @@
-import { handleEventAction } from './eventsUtils.ts';
+import { handleEventAction } from "./eventsUtils.ts";
 import { AppDispatch } from "../state/store.ts";
 import { EventItem } from "../types/eventTypes.ts";
 
-
 export const handleEventAction = (
-  eventItem: EventItem,
+  value: EventItem,
   dispatch: AppDispatch,
-  actionCreator: (eventItem: EventItem) => void
+  actionCreator: (value: EventItem) => void
 ) => {
-  const finalEventItem = { ...eventItem };
-  dispatch(actionCreator(finalEventItem));
+  dispatch(actionCreator(value));
+};
+
+export const handleSubmit = (
+  values,
+  actions,
+  handleEventAction,
+  dispatch,
+  actionCreator
+) => {
+  handleEventAction(values, dispatch, actionCreator);
+  actions.resetForm();
 };
 
 
- export const handleSubmit = (values, actions, handleEventAction, dispatch, actionCreator) => {
-    handleEventAction(values,dispatch, actionCreator);
-    actions.resetForm();
-  };

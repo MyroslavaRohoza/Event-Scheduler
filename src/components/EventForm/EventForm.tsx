@@ -1,20 +1,27 @@
-import React from "react";
+import React, { useId } from "react";
 import { Field, Form, ErrorMessage, Formik } from "formik";
+import { v4 as uuidv4 } from "uuid";
 import Button from "../Button/Button.tsx";
-import { EventItem } from "../../types/eventTypes.ts";
-import { handleEventAction, handleSubmit } from "../../utils/eventsUtils.ts";
-import { Dispatch } from "@reduxjs/toolkit";
+import { handleSubmit, handleEventAction } from "../../utils/eventsUtils";
 import { useDispatch } from "react-redux";
-import { addEvent } from "../../state/events/eventSlice.ts";
-
-const categories = [
-  { value: "workshop", label: "Workshop" },
-  { value: "seminar", label: "Seminar" },
-  { value: "conference", label: "Conference" },
-  { value: "other", label: "Other" },
-];
+import { addEvent } from "../../state/events/eventSlice";
+import { EventItem } from "../../types/eventTypes.ts";
 
 const EventForm: React.FC = () => {
+  const dispatch = useDispatch();
+  const titleId = useId();
+  const dateId = useId();
+  const timeId = useId();
+  const categoryId = useId();
+  const descriptionId = useId();
+
+  const categories = [
+    { value: "workshop", label: "Workshop" },
+    { value: "seminar", label: "Seminar" },
+    { value: "conference", label: "Conference" },
+    { value: "other", label: "Other" },
+  ];
+
   const initialValues: EventItem = {
     title: "",
     date: "",
@@ -23,34 +30,39 @@ const EventForm: React.FC = () => {
     description: "",
   };
 
-  const dispatch = useDispatch();
-
   return (
     <Formik
       initialValues={initialValues}
       onSubmit={(values, actions) => {
-        handleSubmit(values, actions, handleEventAction, dispatch, addEvent);
+        const eventWithId = { ...values, id: uuidv4() };
+        handleSubmit(
+          eventWithId,
+          actions,
+          handleEventAction,
+          dispatch,
+          addEvent
+        );
       }}
     >
       <Form>
         <div>
-          <label htmlFor="title">Title:</label>
-          <Field type="text" id="title" name="title" required />
+          <label htmlFor={titleId}>Title:</label>
+          <Field type="text" id={titleId} name="title" required />
           <ErrorMessage name="title" component="div" />
         </div>
         <div>
-          <label htmlFor="date">Date:</label>
-          <Field type="date" id="date" name="date" required />
+          <label htmlFor={dateId}>Date:</label>
+          <Field type="date" id={dateId} name="date" required />
           <ErrorMessage name="date" component="div" />
         </div>
         <div>
-          <label htmlFor="time">Time:</label>
-          <Field type="time" id="time" name="time" required />
+          <label htmlFor={timeId}>Time:</label>
+          <Field type="time" id={timeId} name="time" required />
           <ErrorMessage name="time" component="div" />
         </div>
         <div>
-          <label htmlFor="category">Category:</label>
-          <Field as="select" id="category" name="category" required>
+          <label htmlFor={categoryId}>Category:</label>
+          <Field as="select" id={categoryId} name="category" required>
             <option value="">Select category</option>
             {categories.map((category) => (
               <option key={category.value} value={category.value}>
@@ -61,8 +73,8 @@ const EventForm: React.FC = () => {
           <ErrorMessage name="category" component="div" />
         </div>
         <div>
-          <label htmlFor="description">Description:</label>
-          <Field as="textarea" id="description" name="description" />
+          <label htmlFor={descriptionId}>Description:</label>
+          <Field as="textarea" id={descriptionId} name="description" />
           <ErrorMessage name="description" component="div" />
         </div>
         <Button buttonType="submit">Save</Button>

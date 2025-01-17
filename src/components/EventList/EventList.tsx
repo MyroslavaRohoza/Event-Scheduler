@@ -9,7 +9,7 @@ const EventList = () => {
     <ul>
       {Array.isArray(filteredEvents) && filteredEvents.length === 0 && (
         <li>
-          <p>Please, add your contacts</p>
+          <p>Please, add your events</p>
         </li>
       )}
       {Array.isArray(filteredEvents) &&
