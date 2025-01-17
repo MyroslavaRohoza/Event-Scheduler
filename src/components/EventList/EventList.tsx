@@ -4,6 +4,7 @@ import EventListItem from "../EventListItem/eventListItem";
 
 const EventList = () => {
   const filteredEvents = useSelector(selectEvents);
+  console.log(filteredEvents);
   return (
     <ul>
       {Array.isArray(filteredEvents) && filteredEvents.length === 0 && (
