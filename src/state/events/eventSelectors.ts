@@ -1,5 +1,4 @@
 import { RootState } from "../rootReducer";
-import { createSelector } from "@reduxjs/toolkit";
 
 export const selectEvents = (state: RootState) => state.events.eventList;
 

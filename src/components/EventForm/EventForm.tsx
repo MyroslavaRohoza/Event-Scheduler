@@ -1,14 +1,11 @@
 import React from "react";
-import {  Field, Form, ErrorMessage, Formik } from "formik";
-
-
-type EventValues = {
-  title: string;
-  date: string;
-  time: string;
-  category: string;
-  description: string;
-};
+import { Field, Form, ErrorMessage, Formik } from "formik";
+import Button from "../Button/Button.tsx";
+import { EventItem } from "../../types/eventTypes.ts";
+import { handleEventAction, handleSubmit } from "../../utils/eventsUtils.ts";
+import { Dispatch } from "@reduxjs/toolkit";
+import { useDispatch } from "react-redux";
+import { addEvent } from "../../state/events/eventSlice.ts";
 
 const categories = [
   { value: "workshop", label: "Workshop" },
@@ -18,8 +15,7 @@ const categories = [
 ];
 
 const EventForm: React.FC = () => {
-
-  const initialValues: EventValues = {
+  const initialValues: EventItem = {
     title: "",
     date: "",
     time: "",
@@ -27,14 +23,14 @@ const EventForm: React.FC = () => {
     description: "",
   };
 
-  const handleSubmit = (data: EventValues) => {
-    console.log(data);
-  };
+  const dispatch = useDispatch();
 
   return (
     <Formik
-      initialValues={initialValues} 
-      onSubmit={handleSubmit} 
+      initialValues={initialValues}
+      onSubmit={(values, actions) => {
+        handleSubmit(values, actions, handleEventAction, dispatch, addEvent);
+      }}
     >
       <Form>
         <div>
@@ -69,7 +65,7 @@ const EventForm: React.FC = () => {
           <Field as="textarea" id="description" name="description" />
           <ErrorMessage name="description" component="div" />
         </div>
-        <button type="submit">Save Event</button>
+        <Button>Save</Button>
       </Form>
     </Formik>
   );

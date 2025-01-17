@@ -1,20 +1,15 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { initiaState } from "../initialState.ts";
 import { RootState } from "../rootReducer.ts";
+import { initiaState } from "../initialState.ts";
+import { EventItem } from "../../types/eventTypes.ts";
 
-type Event = {
-  id: number;
-  text: string;
-  completed: boolean;
-};
-
-const initialState= initiaState.events;
+const initialState = initiaState.events;
 
 const eventsSlice = createSlice({
   name: "events",
   initialState,
   reducers: {
-    addEvent: (state: RootState, action: PayloadAction<Event>) => {
+    addEvent: (state: RootState, action: PayloadAction<EventItem>) => {
       state.items.push(action.payload);
     },
 
@@ -24,7 +19,7 @@ const eventsSlice = createSlice({
 
     editEvent: (
       state: RootState,
-      action: PayloadAction<{ id: number; updatedEvent: Partial<Event> }>
+      action: PayloadAction<{ id: number; updatedEvent: Partial<EventItem> }>
     ) => {
       const { id, updatedEvent } = action.payload;
       const index = state.items.findIndex((event) => event.id === id);
