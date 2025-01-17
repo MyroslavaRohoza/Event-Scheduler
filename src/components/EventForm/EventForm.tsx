@@ -65,7 +65,7 @@ const EventForm: React.FC = () => {
           <Field as="textarea" id="description" name="description" />
           <ErrorMessage name="description" component="div" />
         </div>
-        <Button>Save</Button>
+        <Button buttonType="submit">Save</Button>
       </Form>
     </Formik>
   );

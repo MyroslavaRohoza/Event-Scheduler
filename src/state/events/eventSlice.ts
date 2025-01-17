@@ -10,11 +10,11 @@ const eventsSlice = createSlice({
   initialState,
   reducers: {
     addEvent: (state: RootState, action: PayloadAction<EventItem>) => {
-      state.items.push(action.payload);
+      state.eventList.push(action.payload);
     },
 
     deleteEvent: (state: RootState, action: PayloadAction<number>) => {
-      state.items = state.items.filter((event) => event.id !== action.payload);
+      state.items = state.eventList.filter((event) => event.id !== action.payload);
     },
 
     editEvent: (
@@ -22,10 +22,10 @@ const eventsSlice = createSlice({
       action: PayloadAction<{ id: number; updatedEvent: Partial<EventItem> }>
     ) => {
       const { id, updatedEvent } = action.payload;
-      const index = state.items.findIndex((event) => event.id === id);
+      const index = state.eventList.findIndex((event) => event.id === id);
 
       if (index !== -1) {
-        state.items[index] = { ...state.items[index], ...updatedEvent };
+        state.items[index] = { ...state.eventList[index], ...updatedEvent };
       }
     },
   },
