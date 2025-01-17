@@ -2,9 +2,9 @@ import React, { useId } from "react";
 import { Field, Form, ErrorMessage, Formik } from "formik";
 import { v4 as uuidv4 } from "uuid";
 import Button from "../Button/Button.tsx";
-import { handleSubmit, handleEventAction } from "../../utils/eventsUtils";
+import { handleSubmit, handleEventAction } from "../../utils/eventsUtils.ts";
 import { useDispatch } from "react-redux";
-import { addEvent } from "../../state/events/eventSlice";
+import { addEvent } from "../../state/events/eventSlice.ts";
 import { EventItem } from "../../types/eventTypes.ts";
 
 const EventForm: React.FC = () => {
@@ -36,11 +36,11 @@ const EventForm: React.FC = () => {
       onSubmit={(values, actions) => {
         const eventWithId = { ...values, id: uuidv4() };
         handleSubmit(
-          eventWithId,
           actions,
           handleEventAction,
           dispatch,
-          addEvent
+          addEvent,
+          eventWithId
         );
       }}
     >

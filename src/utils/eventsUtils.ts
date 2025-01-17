@@ -3,22 +3,20 @@ import { AppDispatch } from "../state/store.ts";
 import { EventItem } from "../types/eventTypes.ts";
 
 export const handleEventAction = (
-  value: EventItem,
   dispatch: AppDispatch,
-  actionCreator: (value: EventItem) => void
+  actionCreator: (value?: EventItem) => void,
+  value?: EventItem
 ) => {
   dispatch(actionCreator(value));
 };
 
 export const handleSubmit = (
-  values,
   actions,
   handleEventAction,
   dispatch,
-  actionCreator
+  actionCreator,
+  values
 ) => {
-  handleEventAction(values, dispatch, actionCreator);
+  handleEventAction(dispatch, actionCreator, values);
   actions.resetForm();
 };
-
-

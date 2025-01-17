@@ -3,6 +3,7 @@ export const initiaState = {
     eventList: [],
     loading: false,
     error: null,
+    editEvent: false,
   },
   filters: {
     name: "",

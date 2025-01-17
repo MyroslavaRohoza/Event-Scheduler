@@ -1,6 +1,7 @@
 import { RootState } from "../rootReducer";
 
 export const selectEvents = (state: RootState) => state.events.eventList;
+export const selectIsEditEvent=(state: RootState) => state.events.editEvent;
 
 // export const selectFilteredEvents = createSelector(
 //   [selectContacts, selectNameFilter],
