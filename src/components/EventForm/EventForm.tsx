@@ -6,6 +6,7 @@ import { handleSubmit, handleEventAction } from "../../utils/eventsUtils.ts";
 import { useDispatch } from "react-redux";
 import { addEvent } from "../../state/events/eventSlice.ts";
 import { EventItem } from "../../types/eventTypes.ts";
+import { categories } from "../../utils/eventConstants.ts";
 
 const EventForm: React.FC = () => {
   const dispatch = useDispatch();
@@ -15,12 +16,7 @@ const EventForm: React.FC = () => {
   const categoryId = useId();
   const descriptionId = useId();
 
-  const categories = [
-    { value: "workshop", label: "Workshop" },
-    { value: "seminar", label: "Seminar" },
-    { value: "conference", label: "Conference" },
-    { value: "other", label: "Other" },
-  ];
+ 
 
   const initialValues: EventItem = {
     title: "",

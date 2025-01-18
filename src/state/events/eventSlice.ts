@@ -1,22 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { EventItem } from "../../types/eventTypes";
+import { initialState } from "../initialState";
 
 // Define the initial state structure
-export const initialState = {
-  events: {
-    eventList: [] as EventItem[],
-    loading: false,
-    error: null as string | null,
-    editEvent: false,
-  },
-  filter: {
-    eventTitle: "",
-  },
-};
 
 const eventsSlice = createSlice({
   name: "events",
-  initialState,
+  initialState: initialState,
   reducers: {
     addEvent: (state, action: PayloadAction<EventItem>) => {
       state.events.eventList.push(action.payload);
@@ -50,6 +40,18 @@ const eventsSlice = createSlice({
     filterChange: (state, action: PayloadAction<string>) => {
       state.filter.eventTitle = action.payload;
     },
+    setCategoryFilter: (state, action: PayloadAction<string>) => {
+      state.filter.selectedCategory = action.payload;
+    },
+    setDateFilter: (
+      state,
+      action: PayloadAction<{
+        startDate: string | null;
+        endDate: string | null;
+      }>
+    ) => {
+      state.filter.dateRange = action.payload;
+    },
   },
 });
 
@@ -60,6 +62,8 @@ export const {
   turnOnEditEvent,
   turnOffEditEvent,
   filterChange,
+  setCategoryFilter,
+  setDateFilter,
 } = eventsSlice.actions;
 
 export const eventsReducer = eventsSlice.reducer;

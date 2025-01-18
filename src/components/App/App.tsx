@@ -1,3 +1,4 @@
+import EventFilter from "../EventFilter/EventFilter.tsx";
 import EventForm from "../EventForm/EventForm.tsx";
 import EventList from "../EventList/EventList.tsx";
 import SearchBar from "../SearchBar/SearchBar.tsx";
@@ -9,6 +10,7 @@ const App = () => {
     <div>
       <EventForm />
       <SearchBar />
+      <EventFilter />
       <EventList />
     </div>
   );

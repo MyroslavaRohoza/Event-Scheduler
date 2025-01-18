@@ -1,4 +1,4 @@
-export const initiaState = {
+export const initialState = {
   events: {
     eventList: [],
     loading: false,
@@ -7,5 +7,7 @@ export const initiaState = {
   },
   filter: {
     eventTitle: "",
-  }
-}
+    selectedCategory: "",
+    dateRange: { startDate: null, endDate: null }, 
+  },
+};

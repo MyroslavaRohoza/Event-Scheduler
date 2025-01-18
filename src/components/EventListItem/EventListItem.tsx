@@ -10,6 +10,7 @@ import {
 import { selectIsEditEvent } from "../../state/events/eventSelectors.ts";
 import { Field, Formik, Form, ErrorMessage } from "formik";
 import { EventItem } from "../../types/eventTypes.ts";
+import { categories } from "../../utils/eventConstants.ts";
 
 const EventListItem = ({
   item: { title, category, time, date, description, id },
@@ -18,13 +19,6 @@ const EventListItem = ({
 }) => {
   const dispatch = useDispatch();
   const isEditEvent = useSelector(selectIsEditEvent);
-
-  const categories = [
-    { value: "workshop", label: "Workshop" },
-    { value: "seminar", label: "Seminar" },
-    { value: "conference", label: "Conference" },
-    { value: "other", label: "Other" },
-  ];
 
   const initialValues = {
     title: title || "",
