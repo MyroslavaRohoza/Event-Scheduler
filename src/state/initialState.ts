@@ -1,7 +1,6 @@
 export const initialState = {
   events: {
     eventList: [],
-    loading: false,
     error: null,
     editEvent: false,
   },

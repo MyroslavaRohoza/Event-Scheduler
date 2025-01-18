@@ -2,14 +2,31 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { EventItem } from "../../types/eventTypes";
 import { initialState } from "../initialState.ts";
 
-
 const eventsSlice = createSlice({
   name: "events",
   initialState: initialState,
   reducers: {
     addEvent: (state, action: PayloadAction<EventItem>) => {
-      state.events.eventList.push(action.payload);
+      const newEvent = action.payload;
+
+      if (
+        Array.isArray(state.events.eventList) &&
+        state.events.eventList.length > 0
+      ) {
+        const isDuplicate = state.events.eventList.some(
+          (event) => event.title.toLowerCase() === newEvent.title.toLowerCase()
+        );
+
+        if (isDuplicate) {
+          state.events.error = "An event with that name already exists!";
+          return;
+        }
+      }
+
+      state.events.eventList.push(newEvent);
+      state.events.error = null;
     },
+
     deleteEvent: (state, action: PayloadAction<number>) => {
       state.events.eventList = state.events.eventList.filter(
         (event) => event.id !== action.payload
