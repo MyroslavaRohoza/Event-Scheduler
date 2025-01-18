@@ -1,20 +1,28 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "../rootReducer.ts";
-import { initiaState } from "../initialState.ts";
-import { EventItem } from "../../types/eventTypes.ts";
+import { EventItem } from "../../types/eventTypes";
 
-const initialState = initiaState.events;
+// Define the initial state structure
+export const initialState = {
+  events: {
+    eventList: [] as EventItem[],
+    loading: false,
+    error: null as string | null,
+    editEvent: false,
+  },
+  filter: {
+    eventTitle: "",
+  },
+};
 
 const eventsSlice = createSlice({
   name: "events",
   initialState,
   reducers: {
-    addEvent: (state: RootState, action: PayloadAction<EventItem>) => {
-      state.eventList.push(action.payload);
+    addEvent: (state, action: PayloadAction<EventItem>) => {
+      state.events.eventList.push(action.payload);
     },
-
-    deleteEvent: (state: RootState, action: PayloadAction<number>) => {
-      state.eventList = state.eventList.filter(
+    deleteEvent: (state, action: PayloadAction<number>) => {
+      state.events.eventList = state.events.eventList.filter(
         (event) => event.id !== action.payload
       );
     },
@@ -23,20 +31,24 @@ const eventsSlice = createSlice({
       action: PayloadAction<{ id: number; updatedEvent: Partial<EventItem> }>
     ) => {
       const { id, updatedEvent } = action.payload;
-      const index = state.eventList.findIndex((event) => event.id === id);
+      const index = state.events.eventList.findIndex(
+        (event) => event.id === id
+      );
       if (index !== -1) {
-        state.eventList[index] = { ...state.eventList[index], ...updatedEvent };
+        state.events.eventList[index] = {
+          ...state.events.eventList[index],
+          ...updatedEvent,
+        };
       }
     },
-
-    turnOnEditEvent: (state: RootState) => {
-      state.editEvent = true;
+    turnOnEditEvent: (state) => {
+      state.events.editEvent = true;
     },
-    turnOffEditEvent: (state: RootState) => {
-      state.editEvent = false;
+    turnOffEditEvent: (state) => {
+      state.events.editEvent = false;
     },
-    filterChange(state:RootState, action) {
-      state.filter.eventName= action.payload;
+    filterChange: (state, action: PayloadAction<string>) => {
+      state.filter.eventTitle = action.payload;
     },
   },
 });
@@ -45,8 +57,9 @@ export const {
   addEvent,
   deleteEvent,
   editEvent,
-  toggleEditEvent,
   turnOnEditEvent,
   turnOffEditEvent,
+  filterChange,
 } = eventsSlice.actions;
+
 export const eventsReducer = eventsSlice.reducer;

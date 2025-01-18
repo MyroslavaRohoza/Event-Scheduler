@@ -6,6 +6,6 @@ export const initiaState = {
     editEvent: false,
   },
   filter: {
-    eventName: "",
+    eventTitle: "",
   }
 }

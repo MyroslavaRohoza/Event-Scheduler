@@ -1,9 +1,9 @@
 import { useSelector } from "react-redux";
-import { selectEvents } from "../../state/events/eventSelectors";
+import { selectFilteredEvents } from "../../state/events/eventSelectors.ts";
 import EventListItem from "../EventListItem/EventListItem.tsx";
 
 const EventList = () => {
-  const filteredEvents = useSelector(selectEvents);
+  const filteredEvents = useSelector(selectFilteredEvents);
   console.log(filteredEvents);
   return (
     <ul>
