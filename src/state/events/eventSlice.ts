@@ -18,22 +18,25 @@ const eventsSlice = createSlice({
         (event) => event.id !== action.payload
       );
     },
-   editEvent: (
-  state,
-  action: PayloadAction<{ id: number; updatedEvent: Partial<EventItem> }>
-) => {
-  const { id, updatedEvent } = action.payload;
-  const index = state.eventList.findIndex((event) => event.id === id);
-  if (index !== -1) {
-    state.eventList[index] = { ...state.eventList[index], ...updatedEvent };
-  }
-},
+    editEvent: (
+      state,
+      action: PayloadAction<{ id: number; updatedEvent: Partial<EventItem> }>
+    ) => {
+      const { id, updatedEvent } = action.payload;
+      const index = state.eventList.findIndex((event) => event.id === id);
+      if (index !== -1) {
+        state.eventList[index] = { ...state.eventList[index], ...updatedEvent };
+      }
+    },
 
     turnOnEditEvent: (state: RootState) => {
       state.editEvent = true;
     },
     turnOffEditEvent: (state: RootState) => {
       state.editEvent = false;
+    },
+    filterChange(state:RootState, action) {
+      state.filter.eventName= action.payload;
     },
   },
 });

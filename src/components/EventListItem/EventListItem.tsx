@@ -38,7 +38,6 @@ const EventListItem = ({
     <Formik
       initialValues={initialValues}
       onSubmit={(values, actions) => {
-        console.log(values, id);
         const updatedEvent = { id, updatedEvent: values };
         handleSubmit(
           actions,

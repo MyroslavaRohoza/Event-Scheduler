@@ -1,15 +1,15 @@
+import { createSelector } from "@reduxjs/toolkit";
 import { RootState } from "../rootReducer";
 
 export const selectEvents = (state: RootState) => state.events.eventList;
-export const selectIsEditEvent=(state: RootState) => state.events.editEvent;
+export const selectIsEditEvent = (state: RootState) => state.events.editEvent;
+export const selectTitleEvent = (state: RootState) => state.filter?.eventName;
 
-// export const selectFilteredEvents = createSelector(
-//   [selectContacts, selectNameFilter],
-//   (contacts, filter) =>
-//     Array.isArray(contacts) &&
-//     contacts.filter(
-//       (contact) =>
-//         contact.name.toLowerCase().includes(filter.toLowerCase()) ||
-//         contact.number.toLowerCase().includes(filter.toLowerCase())
-//     )
-// );
+export const selectFilteredEvents = createSelector(
+  [selectEvents, selectTitleEvent],
+  (events, filter) =>
+    Array.isArray(events) &&
+    events.filter((event) =>
+      event.title.toLowerCase().includes(filter.toLowerCase())
+    )
+);

@@ -5,7 +5,7 @@ export const initiaState = {
     error: null,
     editEvent: false,
   },
-  filters: {
-    name: "",
-  },
-};
+  filter: {
+    eventName: "",
+  }
+}
