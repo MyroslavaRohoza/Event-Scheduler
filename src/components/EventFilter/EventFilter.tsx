@@ -1,16 +1,16 @@
 import { useDispatch, useSelector } from "react-redux";
 import { categories } from "../../utils/eventConstants.ts";
 import { handleEventAction } from "../../utils/eventsUtils.ts";
-import { selectFilteredEventsByDate } from "../../state/events/eventSelectors.ts";
 import {
   setCategoryFilter,
   setDateFilter,
 } from "../../state/events/eventSlice.ts";
 import { useState } from "react";
+import { selectFilteredEvents } from "../../state/events/eventSelectors.ts";
 
 const EventFilter = () => {
   const dispatch = useDispatch();
-  const events = useSelector(selectFilteredEventsByDate);
+  const events = useSelector(selectFilteredEvents);
 
   const [dateRange, setDateRange] = useState({
     startDate: "",
@@ -36,17 +36,14 @@ const EventFilter = () => {
         onChange={(evt) =>
           handleEventAction(dispatch, setCategoryFilter, evt.target.value)
         }
-        defaultValue=""
       >
-        <option value="">All Categories</option>
+        <option value="all">All Categories</option>
         {categories.map((category) => (
           <option key={category.value} value={category.value}>
             {category.label}
           </option>
         ))}
       </select>
-
-      {/* Фильтр по времени */}
       <div>
         <label>
           Start Date:
@@ -68,14 +65,14 @@ const EventFilter = () => {
         </label>
       </div>
 
-      <ul>
+      {/* <ul>
         {Array.isArray(events) &&
           events.map((event) => (
             <li key={event.id}>
               {event.title} - {event.category} - {event.eventDate}
             </li>
           ))}
-      </ul>
+      </ul> */}
     </div>
   );
 };

@@ -1,13 +1,16 @@
 export const initialState = {
   events: {
-    eventList: [],
+    eventList: [], 
     loading: false,
     error: null,
     editEvent: false,
   },
   filter: {
     eventTitle: "",
-    selectedCategory: "",
-    dateRange: { startDate: null, endDate: null }, 
+    selectedCategory: "all",
+    dateRange: {
+      startDate: null,
+      endDate: null,
+    },
   },
-};
+}
