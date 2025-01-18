@@ -2,7 +2,6 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { EventItem } from "../../types/eventTypes";
 import { initialState } from "../initialState.ts";
 
-// Define the initial state structure
 
 const eventsSlice = createSlice({
   name: "events",

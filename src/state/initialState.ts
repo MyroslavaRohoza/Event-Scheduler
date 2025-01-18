@@ -1,6 +1,6 @@
 export const initialState = {
   events: {
-    eventList: [], 
+    eventList: [],
     loading: false,
     error: null,
     editEvent: false,
@@ -9,8 +9,8 @@ export const initialState = {
     eventTitle: "",
     selectedCategory: "all",
     dateRange: {
-      startDate: null,
-      endDate: null,
+      startDate: "",
+      endDate: "",
     },
   },
-}
+};

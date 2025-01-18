@@ -6,28 +6,29 @@ import {
   setDateFilter,
 } from "../../state/events/eventSlice.ts";
 import { useState } from "react";
-import { selectFilteredEvents } from "../../state/events/eventSelectors.ts";
+import { selectDateRange } from "../../state/events/eventSelectors.ts";
 
 const EventFilter = () => {
   const dispatch = useDispatch();
-  const events = useSelector(selectFilteredEvents);
+  const dateRange = useSelector(selectDateRange);
 
-  const [dateRange, setDateRange] = useState({
-    startDate: "",
-    endDate: "",
+  const [localDateRange, setLocalDateRange] = useState({
+    startDate: dateRange.startDate || "", 
+    endDate: dateRange.endDate || "", 
   });
 
   const handleDateChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = evt.target;
-    setDateRange((prev) => ({ ...prev, [name]: value }));
+    setLocalDateRange((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
 
-    if (name === "startDate" || name === "endDate") {
-      const updatedRange = {
-        ...dateRange,
-        [name]: value,
-      };
-      handleEventAction(dispatch, setDateFilter, updatedRange);
-    }
+    const updatedRange = {
+      ...localDateRange,
+      [name]: value,
+    };
+    handleEventAction(dispatch, setDateFilter, updatedRange);
   };
 
   return (
@@ -44,13 +45,14 @@ const EventFilter = () => {
           </option>
         ))}
       </select>
+
       <div>
         <label>
           Start Date:
           <input
             type="date"
             name="startDate"
-            value={dateRange.startDate}
+            value={localDateRange.startDate || ""} 
             onChange={handleDateChange}
           />
         </label>
@@ -59,20 +61,11 @@ const EventFilter = () => {
           <input
             type="date"
             name="endDate"
-            value={dateRange.endDate}
+            value={localDateRange.endDate || ""}
             onChange={handleDateChange}
           />
         </label>
       </div>
-
-      {/* <ul>
-        {Array.isArray(events) &&
-          events.map((event) => (
-            <li key={event.id}>
-              {event.title} - {event.category} - {event.eventDate}
-            </li>
-          ))}
-      </ul> */}
     </div>
   );
 };
