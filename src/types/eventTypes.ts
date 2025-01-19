@@ -1,6 +1,5 @@
 import {
   ButtonProps as MuiButtonProps,
-  Button as MuiButton,
 } from "@mui/material";
 
 export type EventItem ={

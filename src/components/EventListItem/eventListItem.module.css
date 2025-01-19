@@ -1,8 +1,9 @@
 .containerWrapper {
-  padding: 25px;
+  padding: 20px;
   display: inline-grid;
   grid-gap: 20px;
-  grid-template-columns: repeat(2, 1fr);
+  width: 100%;
+  grid-template-columns: repeat(2, auto);
   align-items: center;
   border: 1px solid gray;
   border-radius: 5px;
