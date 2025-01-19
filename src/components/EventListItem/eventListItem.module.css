@@ -1,0 +1,28 @@
+.containerWrapper {
+  padding: 25px;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 15px;
+  border: 1px solid gray;
+  border-radius: 5px;
+}
+
+.eventTitle {
+  font-size: 28px;
+}
+
+.buttonContainer {
+  display: flex;
+  gap: 30px;
+}
+
+.eventForm {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.eventForm label {
+  display: flex;
+  gap: 3px;
+}

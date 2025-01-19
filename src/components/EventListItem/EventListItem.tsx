@@ -1,3 +1,4 @@
+import css from "./eventListItem.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { handleEventAction, handleSubmit } from "../../utils/eventsUtils.ts";
 import Button from "../Button/Button.tsx";
@@ -7,13 +8,11 @@ import {
   editEvent,
   turnOffEditEvent,
 } from "../../state/events/eventSlice.ts";
-import {
-  selectEditEventId,
-  selectIsEditEvent,
-} from "../../state/events/eventSelectors.ts";
-import { Field, Formik, Form, ErrorMessage } from "formik";
+import { selectEditEventId } from "../../state/events/eventSelectors.ts";
+import { Field, Formik, Form } from "formik";
 import { EventItem } from "../../types/eventTypes.ts";
 import { categories } from "../../utils/eventConstants.ts";
+import { TextField } from "@mui/material";
 
 const EventListItem = ({
   item: { title, category, time, date, description, id },
@@ -34,7 +33,7 @@ const EventListItem = ({
   };
 
   return isEditEvent ? (
-    <li>
+    <li className={css.containerWrapper}>
       <Formik
         initialValues={initialValues}
         onSubmit={(values, actions) => {
@@ -49,16 +48,38 @@ const EventListItem = ({
           handleEventAction(dispatch, turnOffEditEvent);
         }}
       >
-        <Form>
-          <div>
-            <Field type="text" id="title" name="title" required />
-            <ErrorMessage name="title" component="div" />
-          </div>
-          <div>
-            <label htmlFor="category">
-              <strong>Category:</strong>
-            </label>
-            <Field as="select" id="category" name="category" required>
+        <Form className={css.eventForm}>
+          <Field
+            type="text"
+            id="title"
+            name="title"
+            required
+            as={TextField}
+            variant="outlined"
+            fullWidth
+            InputProps={{
+              inputProps: {
+                style: {
+                  padding: "5px",
+                },
+              },
+            }}
+          />
+          <label htmlFor="category">
+            <strong>Category:</strong>
+            <Field
+              as="select"
+              id="category"
+              name="category"
+              required
+              style={{
+                padding: "5px",
+                width: "100%",
+                border: "1px solid #ccc",
+                borderRadius: "4px",
+                outline: "none",
+              }}
+            >
               <option value="">Select category</option>
               {categories.map((cat) => (
                 <option key={cat.value} value={cat.value}>
@@ -66,33 +87,69 @@ const EventListItem = ({
                 </option>
               ))}
             </Field>
-            <ErrorMessage name="category" component="div" />
-          </div>
-          <div>
-            <label htmlFor="date">
-              <strong>Date:</strong>
-            </label>
-            <Field type="date" id="date" name="date" required />
-            <ErrorMessage name="date" component="div" />
-          </div>
-          <div>
-            <label htmlFor="time">
-              <strong>Time:</strong>
-            </label>
-            <Field type="time" id="time" name="time" required />
-            <ErrorMessage name="time" component="div" />
-          </div>
-          <div>
-            <Field as="textarea" id="description" name="description" />
-            <ErrorMessage name="description" component="div" />
-          </div>
+          </label>
+          <label htmlFor="date">
+            <strong>Date:</strong>
+            <Field
+              type="date"
+              id="date"
+              name="date"
+              required
+              as={TextField}
+              variant="outlined"
+              fullWidth
+              InputProps={{
+                inputProps: {
+                  style: {
+                    padding: "5px",
+                  },
+                },
+              }}
+            />
+          </label>
+          <label htmlFor="time">
+            <strong>Time:</strong>
+            <Field
+              type="time"
+              id="time"
+              name="time"
+              required
+              as={TextField}
+              variant="outlined"
+              fullWidth
+              InputProps={{
+                inputProps: {
+                  style: {
+                    padding: "5px",
+                  },
+                },
+              }}
+            />
+          </label>
+          <Field
+            id="description"
+            name="description"
+            style={{ resize: "none" }}
+            as={TextField}
+            variant="outlined"
+            fullWidth
+            InputProps={{
+              inputProps: {
+                style: {
+                  padding: "5px",
+                },
+              },
+            }}
+          />
           <Button buttonType="submit">Save</Button>
         </Form>
       </Formik>
     </li>
   ) : (
-    <li>
-      <h3>{title}</h3>
+    <li className={css.containerWrapper}>
+      <span className={css.eventTitle}>
+        <strong>{title}</strong>
+      </span>
       <p>
         <strong>Category:</strong> {category}
       </p>
@@ -103,16 +160,21 @@ const EventListItem = ({
         <strong>Time:</strong> <time>{time}</time>
       </p>
       <p>{description}</p>
-      <Button
-        handleBtnClick={() => handleEventAction(dispatch, turnOnEditEvent, id)}
-      >
-        Edit
-      </Button>
-      <Button
-        handleBtnClick={() => handleEventAction(dispatch, deleteEvent, id)}
-      >
-        Delete
-      </Button>
+      <div className={css.buttonContainer}>
+        <Button
+          handleBtnClick={() =>
+            handleEventAction(dispatch, turnOnEditEvent, id)
+          }
+        >
+          Edit
+        </Button>
+        <Button
+          backgroundColor="red"
+          handleBtnClick={() => handleEventAction(dispatch, deleteEvent, id)}
+        >
+          Delete
+        </Button>
+      </div>
     </li>
   );
 };

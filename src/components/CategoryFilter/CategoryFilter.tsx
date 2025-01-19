@@ -1,22 +1,39 @@
-import { handleEventAction } from "../../utils/eventsUtils.ts";
 import { useDispatch } from "react-redux";
+import { handleEventAction } from "../../utils/eventsUtils.ts";
 import { setCategoryFilter } from "../../state/filter/filterSlice.ts";
 import { categories } from "../../utils/eventConstants.ts";
+import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 
 export const CategoryFilter = () => {
   const dispatch = useDispatch();
+
   return (
-    <select
-      onChange={(evt) =>
-        handleEventAction(dispatch, setCategoryFilter, evt.target.value)
-      }
+    <FormControl
+      variant="outlined"
+      fullWidth
+      sx={{ width: "30%", marginBottom: 2, marginTop: "30px" }}
     >
-      <option value="all">All Categories</option>
-      {categories.map((category) => (
-        <option key={category.value} value={category.value}>
-          {category.label}
-        </option>
-      ))}
-    </select>
+      <InputLabel id="category-select-label">Category</InputLabel>
+      <Select
+        labelId="category-select-label"
+        defaultValue="all"
+        onChange={(evt) =>
+          handleEventAction(dispatch, setCategoryFilter, evt.target.value)
+        }
+        label="Category"
+        sx={{
+          "& .MuiOutlinedInput-root": {
+            borderRadius: "8px",
+          },
+        }}
+      >
+        <MenuItem value="all">All Categories</MenuItem>
+        {categories.map((category) => (
+          <MenuItem key={category.value} value={category.value}>
+            {category.label}
+          </MenuItem>
+        ))}
+      </Select>
+    </FormControl>
   );
 };

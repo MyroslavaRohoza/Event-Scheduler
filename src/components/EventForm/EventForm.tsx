@@ -74,10 +74,10 @@ const EventForm: React.FC = () => {
             variant="outlined"
             label="Date"
             fullWidth
-            sx={{ marginBottom: 2 }}
             InputLabelProps={{
               shrink: true,
             }}
+            sx={{ marginBottom: 2 }}
           />
           <Field
             type="time"
