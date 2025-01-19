@@ -1,14 +1,12 @@
 import { AppDispatch } from "../state/store.ts";
-import { EventItem } from "../types/eventTypes.ts";
 
-export const handleEventAction = (
+export const handleEventAction = <T>(
   dispatch: AppDispatch,
-  actionCreator: (value?: EventItem | HTMLInputElement | string | undefined) => void,
-  value?: EventItem | HTMLInputElement | string 
+  actionCreator: (value: T) => void,
+  value: T
 ) => {
   dispatch(actionCreator(value));
 };
-
 
 export const handleSubmit = (
   actions,

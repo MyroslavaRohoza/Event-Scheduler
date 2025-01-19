@@ -1,9 +1,7 @@
 import EventFilter from "../EventFilter/EventFilter.tsx";
 import EventForm from "../EventForm/EventForm.tsx";
-import EventList from "../EventList/EventList.tsx";
+import PaginatedEventsList from "../PaginatedEventsList/PaginatedEventsList.tsx";
 import SearchBar from "../SearchBar/SearchBar.tsx";
-
-type AppProps = {};
 
 const App = () => {
   return (
@@ -11,7 +9,7 @@ const App = () => {
       <EventForm />
       <SearchBar />
       <EventFilter />
-      <EventList />
+      <PaginatedEventsList />
     </div>
   );
 };

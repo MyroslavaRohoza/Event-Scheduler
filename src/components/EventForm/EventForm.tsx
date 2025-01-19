@@ -8,6 +8,7 @@ import { addEvent } from "../../state/events/eventSlice.ts";
 import { EventItem } from "../../types/eventTypes.ts";
 import { categories } from "../../utils/eventConstants.ts";
 import { selectError } from "../../state/events/eventSelectors.ts";
+import { setTotalItems } from "../../state/pages/pagesSlice.ts";
 
 const EventForm: React.FC = () => {
   const dispatch = useDispatch();
@@ -40,6 +41,7 @@ const EventForm: React.FC = () => {
             addEvent,
             eventWithId
           );
+          handleEventAction(dispatch, setTotalItems, 1);
         }}
       >
         <Form>

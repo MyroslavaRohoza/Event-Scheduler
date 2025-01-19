@@ -1,22 +1,22 @@
-import { useSelector } from "react-redux";
 import EventListItem from "../EventListItem/EventListItem.tsx";
-import { selectFilteredEvents } from "../../state/events/eventSelectors.ts";
+import PaginatedEvents from "../PaginatedEvents/PaginatedEvents.tsx";
 
-const EventList = () => {
-  const filteredEvents = useSelector(selectFilteredEvents);
-  console.log(filteredEvents);
+const EventList = ({filteredEvents}) => {
   return (
-    <ul>
-      {Array.isArray(filteredEvents) && filteredEvents.length === 0 && (
-        <li>
-          <p>Please, add your events</p>
-        </li>
-      )}
-      {Array.isArray(filteredEvents) &&
-        filteredEvents.map((eventItem) => {
-          return <EventListItem key={eventItem.id} item={eventItem} />;
-        })}
-    </ul>
+    <>
+      <ul>
+        {Array.isArray(filteredEvents) && filteredEvents.length === 0 && (
+          <li>
+            <p>Please, add your events</p>
+          </li>
+        )}
+        {Array.isArray(filteredEvents) &&
+          filteredEvents.map((eventItem) => {
+            return <EventListItem key={eventItem.id} item={eventItem} />;
+          })}
+      </ul>
+      <PaginatedEvents items={filteredEvents} itemsPerPage={3} />
+    </>
   );
 };
 

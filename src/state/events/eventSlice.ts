@@ -1,34 +1,31 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { EventItem } from "../../types/eventTypes";
+import { EventItem } from "../../types/eventTypes.ts";
 import { initialState } from "../initialState.ts";
 
 const eventsSlice = createSlice({
   name: "events",
-  initialState: initialState,
+  initialState: initialState.events,
   reducers: {
     addEvent: (state, action: PayloadAction<EventItem>) => {
       const newEvent = action.payload;
 
-      if (
-        Array.isArray(state.events.eventList) &&
-        state.events.eventList.length > 0
-      ) {
-        const isDuplicate = state.events.eventList.some(
+      if (Array.isArray(state.eventList) && state.eventList.length > 0) {
+        const isDuplicate = state.eventList.some(
           (event) => event.title.toLowerCase() === newEvent.title.toLowerCase()
         );
 
         if (isDuplicate) {
-          state.events.error = "An event with that name already exists!";
+          state.error = "An event with that name already exists!";
           return;
         }
       }
 
-      state.events.eventList.push(newEvent);
-      state.events.error = null;
+      state.eventList.push(newEvent);
+      state.error = null;
     },
 
     deleteEvent: (state, action: PayloadAction<number>) => {
-      state.events.eventList = state.events.eventList.filter(
+      state.eventList = state.eventList.filter(
         (event) => event.id !== action.payload
       );
     },
@@ -37,36 +34,19 @@ const eventsSlice = createSlice({
       action: PayloadAction<{ id: number; updatedEvent: Partial<EventItem> }>
     ) => {
       const { id, updatedEvent } = action.payload;
-      const index = state.events.eventList.findIndex(
-        (event) => event.id === id
-      );
+      const index = state.eventList.findIndex((event) => event.id === id);
       if (index !== -1) {
-        state.events.eventList[index] = {
-          ...state.events.eventList[index],
+        state.eventList[index] = {
+          ...state.eventList[index],
           ...updatedEvent,
         };
       }
     },
     turnOnEditEvent: (state) => {
-      state.events.editEvent = true;
+      state.editEvent = true;
     },
     turnOffEditEvent: (state) => {
-      state.events.editEvent = false;
-    },
-    filterChange: (state, action: PayloadAction<string>) => {
-      state.filter.eventTitle = action.payload;
-    },
-    setCategoryFilter: (state, action: PayloadAction<string>) => {
-      state.filter.selectedCategory = action.payload;
-    },
-    setDateFilter: (
-      state,
-      action: PayloadAction<{
-        startDate: string | null;
-        endDate: string | null;
-      }>
-    ) => {
-      state.filter.dateRange = action.payload;
+      state.editEvent = false;
     },
   },
 });
@@ -77,9 +57,6 @@ export const {
   editEvent,
   turnOnEditEvent,
   turnOffEditEvent,
-  filterChange,
-  setCategoryFilter,
-  setDateFilter,
 } = eventsSlice.actions;
 
 export const eventsReducer = eventsSlice.reducer;

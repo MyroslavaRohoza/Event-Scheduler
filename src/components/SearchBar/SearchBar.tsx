@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
-import { selectTitleEvent } from "../../state/events/eventSelectors.ts";
 import { handleEventAction } from "../../utils/eventsUtils.ts";
-import { filterChange } from "../../state/events/eventSlice.ts";
+import { selectTitleEvent } from "../../state/filter/filterSelectors.ts";
+import { filterChange } from "../../state/filter/filterSlice.ts";
 
 const SearchBar = () => {
   const title = useSelector(selectTitleEvent);

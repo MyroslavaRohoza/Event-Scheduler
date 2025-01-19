@@ -1,12 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import { categories } from "../../utils/eventConstants.ts";
 import { handleEventAction } from "../../utils/eventsUtils.ts";
-import {
-  setCategoryFilter,
-  setDateFilter,
-} from "../../state/events/eventSlice.ts";
 import { useState } from "react";
-import { selectDateRange } from "../../state/events/eventSelectors.ts";
+import { selectDateRange } from "../../state/filter/filterSelectors.ts";
+import { setCategoryFilter, setDateFilter } from "../../state/filter/filterSlice.ts";
 
 const EventFilter = () => {
   const dispatch = useDispatch();
