@@ -2,7 +2,7 @@ export const initialState = {
   events: {
     eventList: [],
     error: null,
-    editEvent: false,
+    editEventId: null,
   },
   filter: {
     eventTitle: "",

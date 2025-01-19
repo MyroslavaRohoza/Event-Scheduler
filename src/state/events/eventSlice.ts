@@ -42,11 +42,11 @@ const eventsSlice = createSlice({
         };
       }
     },
-    turnOnEditEvent: (state) => {
-      state.editEvent = true;
+    turnOnEditEvent: (state,action: PayloadAction<number>) => {
+      state.editEventId = action.payload;
     },
     turnOffEditEvent: (state) => {
-      state.editEvent = false;
+      state.editEventId = null;
     },
   },
 });

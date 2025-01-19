@@ -7,7 +7,10 @@ import {
   editEvent,
   turnOffEditEvent,
 } from "../../state/events/eventSlice.ts";
-import { selectIsEditEvent } from "../../state/events/eventSelectors.ts";
+import {
+  selectEditEventId,
+  selectIsEditEvent,
+} from "../../state/events/eventSelectors.ts";
 import { Field, Formik, Form, ErrorMessage } from "formik";
 import { EventItem } from "../../types/eventTypes.ts";
 import { categories } from "../../utils/eventConstants.ts";
@@ -18,7 +21,9 @@ const EventListItem = ({
   item: EventItem;
 }) => {
   const dispatch = useDispatch();
-  const isEditEvent = useSelector(selectIsEditEvent);
+
+  const editingEventId = useSelector(selectEditEventId);
+  const isEditEvent = editingEventId === id;
 
   const initialValues = {
     title: title || "",
@@ -29,23 +34,22 @@ const EventListItem = ({
   };
 
   return isEditEvent ? (
-    <Formik
-      initialValues={initialValues}
-      onSubmit={(values, actions) => {
-        const updatedEvent = { id, updatedEvent: values };
-        handleSubmit(
-          actions,
-          handleEventAction,
-          dispatch,
-          editEvent,
-          updatedEvent
-        );
-
-        handleEventAction(dispatch, turnOffEditEvent);
-      }}
-    >
-      <Form>
-        <li>
+    <li>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={(values, actions) => {
+          const updatedEvent = { id, updatedEvent: values };
+          handleSubmit(
+            actions,
+            handleEventAction,
+            dispatch,
+            editEvent,
+            updatedEvent
+          );
+          handleEventAction(dispatch, turnOffEditEvent);
+        }}
+      >
+        <Form>
           <div>
             <Field type="text" id="title" name="title" required />
             <ErrorMessage name="title" component="div" />
@@ -83,22 +87,22 @@ const EventListItem = ({
             <ErrorMessage name="description" component="div" />
           </div>
           <Button buttonType="submit">Save</Button>
-        </li>
-      </Form>
-    </Formik>
+        </Form>
+      </Formik>
+    </li>
   ) : (
     <li>
       <h3>{title}</h3>
-      {/* <p>
+      <p>
         <strong>Category:</strong> {category}
-      </p>*/}
+      </p>
       <p>
         <strong>Date:</strong> <time dateTime={date}>{date}</time>
       </p>
       <p>
         <strong>Time:</strong> <time>{time}</time>
       </p>
-      <p>{description}</p> 
+      <p>{description}</p>
       <Button
         handleBtnClick={() => handleEventAction(dispatch, turnOnEditEvent, id)}
       >
