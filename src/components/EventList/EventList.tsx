@@ -1,5 +1,4 @@
 import EventListItem from "../EventListItem/EventListItem.tsx";
-import PaginatedEvents from "../PaginatedEvents/PaginatedEvents.tsx";
 
 const EventList = ({filteredEvents}) => {
   return (

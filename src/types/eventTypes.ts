@@ -1,3 +1,8 @@
+import {
+  ButtonProps as MuiButtonProps,
+  Button as MuiButton,
+} from "@mui/material";
+
 export type EventItem ={
   id?: string; 
   title: string;
@@ -9,4 +14,10 @@ export type EventItem ={
 
 export type EventState = {
   items: Event[];
+};
+
+export type CustomButtonProps = MuiButtonProps & {
+  type?: "button" | "submit" | "reset";
+  handleBtnClick?: React.MouseEventHandler<HTMLButtonElement>;
+  backgroundColor?: string;
 };

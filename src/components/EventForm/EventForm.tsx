@@ -1,5 +1,6 @@
+import css from "./eventForm.module.css";
 import React, { useId } from "react";
-import { Field, Form, ErrorMessage, Formik } from "formik";
+import { Field, Form, Formik } from "formik";
 import { v4 as uuidv4 } from "uuid";
 import Button from "../Button/Button.tsx";
 import { handleSubmit, handleEventAction } from "../../utils/eventsUtils.ts";
@@ -9,6 +10,13 @@ import { EventItem } from "../../types/eventTypes.ts";
 import { categories } from "../../utils/eventConstants.ts";
 import { selectError } from "../../state/events/eventSelectors.ts";
 import { setTotalItems } from "../../state/pages/pagesSlice.ts";
+import {
+  TextField,
+  MenuItem,
+  Select,
+  InputLabel,
+  FormControl,
+} from "@mui/material";
 
 const EventForm: React.FC = () => {
   const dispatch = useDispatch();
@@ -29,9 +37,10 @@ const EventForm: React.FC = () => {
   };
 
   return (
-    <>
+    <div className={css.eventForm}>
       <Formik
         initialValues={initialValues}
+        className={css.eventForm}
         onSubmit={(values, actions) => {
           const eventWithId = { ...values, id: uuidv4() };
           handleSubmit(
@@ -45,43 +54,81 @@ const EventForm: React.FC = () => {
         }}
       >
         <Form>
-          <div>
-            <label htmlFor={titleId}>Title:</label>
-            <Field type="text" id={titleId} name="title" required />
-            <ErrorMessage name="title" component="div" />
-          </div>
-          <div>
-            <label htmlFor={dateId}>Date:</label>
-            <Field type="date" id={dateId} name="date" required />
-            <ErrorMessage name="date" component="div" />
-          </div>
-          <div>
-            <label htmlFor={timeId}>Time:</label>
-            <Field type="time" id={timeId} name="time" required />
-            <ErrorMessage name="time" component="div" />
-          </div>
-          <div>
-            <label htmlFor={categoryId}>Category:</label>
-            <Field as="select" id={categoryId} name="category" required>
-              <option value="">Select category</option>
+          <Field
+            type="text"
+            id={titleId}
+            name="title"
+            required
+            as={TextField}
+            variant="outlined"
+            label="Title"
+            fullWidth
+            sx={{ marginBottom: 2 }}
+          />
+          <Field
+            type="date"
+            id={dateId}
+            name="date"
+            required
+            as={TextField}
+            variant="outlined"
+            label="Date"
+            fullWidth
+            sx={{ marginBottom: 2 }}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+          <Field
+            type="time"
+            id={timeId}
+            name="time"
+            required
+            as={TextField}
+            variant="outlined"
+            label="Time"
+            fullWidth
+            sx={{ marginBottom: 2 }}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+          <FormControl fullWidth sx={{ marginBottom: 2 }}>
+            <InputLabel id={categoryId}>Category</InputLabel>
+            <Field
+              as={Select}
+              id={categoryId}
+              name="category"
+              required
+              labelId={categoryId}
+              label="Category"
+            >
+              <MenuItem>Select category</MenuItem>
               {categories.map((category) => (
-                <option key={category.value} value={category.value}>
+                <MenuItem key={category.value} value={category.value}>
                   {category.label}
-                </option>
+                </MenuItem>
               ))}
             </Field>
-            <ErrorMessage name="category" component="div" />
-          </div>
-          <div>
-            <label htmlFor={descriptionId}>Description:</label>
-            <Field as="textarea" id={descriptionId} name="description" />
-            <ErrorMessage name="description" component="div" />
-          </div>
-          <Button buttonType="submit">Save</Button>
+          </FormControl>
+          <Field
+            as={TextField}
+            id={descriptionId}
+            name="description"
+            multiline
+            rows={3}
+            placeholder="Description"
+            sx={{
+              resize: "none",
+              width: "100%",
+              marginBottom: 3,
+            }}
+          />
+          <Button>Save</Button>
         </Form>
       </Formik>
       {errorMessage && <p>{errorMessage}</p>}
-    </>
+    </div>
   );
 };
 

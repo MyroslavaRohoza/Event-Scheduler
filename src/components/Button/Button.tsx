@@ -1,8 +1,30 @@
-const Button = ({ children, buttonType = "button", handleBtnClick }) => {
+import React from "react";
+import {
+  Button as MuiButton,
+} from "@mui/material";
+import { CustomButtonProps } from "../../types/eventTypes";
+
+const Button: React.FC<CustomButtonProps> = ({
+  children,
+  type = "submit",
+  handleBtnClick,
+  variant = "contained",
+  backgroundColor,
+  ...rest
+}) => {
   return (
-    <button type={buttonType} onClick={handleBtnClick}>
+    <MuiButton
+      onClick={handleBtnClick}
+      variant={variant}
+      type={type}
+      {...rest}
+      sx={{
+        backgroundColor: backgroundColor,
+        padding: "10px 30px",
+      }}
+    >
       {children}
-    </button>
+    </MuiButton>
   );
 };
 
