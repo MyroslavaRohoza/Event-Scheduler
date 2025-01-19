@@ -10,17 +10,6 @@ const PaginatedEvents = ({ items, itemsPerPage }) => {
   console.log(currentItems);
   return (
     <div>
-      {" "}
-      <ul>
-        {Array.isArray(currentItems) &&
-          currentItems.map((eventItem) => {
-            return (
-              <li key={eventItem.id}>
-                <p>{eventItem.title}</p>
-              </li>
-            );
-          })}
-      </ul>
       <EventList filteredEvents={currentItems} />
       <div>
         <button
