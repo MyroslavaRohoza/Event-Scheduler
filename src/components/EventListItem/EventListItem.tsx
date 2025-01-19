@@ -33,7 +33,7 @@ const EventListItem = ({
   };
 
   return isEditEvent ? (
-    <li className={css.containerWrapper}>
+    <li>
       <Formik
         initialValues={initialValues}
         onSubmit={(values, actions) => {
@@ -48,7 +48,7 @@ const EventListItem = ({
           handleEventAction(dispatch, turnOffEditEvent);
         }}
       >
-        <Form className={css.eventForm}>
+        <Form className={css.containerWrapper}>
           <Field
             type="text"
             id="title"
@@ -65,6 +65,7 @@ const EventListItem = ({
               },
             }}
           />
+
           <label htmlFor="category">
             <strong>Category:</strong>
             <Field
@@ -126,21 +127,24 @@ const EventListItem = ({
               }}
             />
           </label>
-          <Field
-            id="description"
-            name="description"
-            style={{ resize: "none" }}
-            as={TextField}
-            variant="outlined"
-            fullWidth
-            InputProps={{
-              inputProps: {
-                style: {
-                  padding: "5px",
+          <label htmlFor="description">
+            <strong>Description:</strong>
+            <Field
+              id="description"
+              name="description"
+              style={{ resize: "none" }}
+              as={TextField}
+              variant="outlined"
+              fullWidth
+              InputProps={{
+                inputProps: {
+                  style: {
+                    padding: "5px",
+                  },
                 },
-              },
-            }}
-          />
+              }}
+            />
+          </label>
           <Button buttonType="submit">Save</Button>
         </Form>
       </Formik>

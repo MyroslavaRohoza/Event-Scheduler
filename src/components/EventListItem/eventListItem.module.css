@@ -1,8 +1,9 @@
 .containerWrapper {
   padding: 25px;
-  display: inline-flex;
-  flex-direction: column;
-  gap: 15px;
+  display: inline-grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
   border: 1px solid gray;
   border-radius: 5px;
 }
@@ -14,12 +15,6 @@
 .buttonContainer {
   display: flex;
   gap: 30px;
-}
-
-.eventForm {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
 }
 
 .eventForm label {
