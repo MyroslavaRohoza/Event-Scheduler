@@ -89,16 +89,16 @@ const EventListItem = ({
   ) : (
     <li>
       <h3>{title}</h3>
-      <p>
+      {/* <p>
         <strong>Category:</strong> {category}
-      </p>
+      </p>*/}
       <p>
         <strong>Date:</strong> <time dateTime={date}>{date}</time>
       </p>
       <p>
         <strong>Time:</strong> <time>{time}</time>
       </p>
-      <p>{description}</p>
+      <p>{description}</p> 
       <Button
         handleBtnClick={() => handleEventAction(dispatch, turnOnEditEvent, id)}
       >

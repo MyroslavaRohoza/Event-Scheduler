@@ -15,7 +15,6 @@ const EventList = ({filteredEvents}) => {
             return <EventListItem key={eventItem.id} item={eventItem} />;
           })}
       </ul>
-      <PaginatedEvents items={filteredEvents} itemsPerPage={3} />
     </>
   );
 };

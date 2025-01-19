@@ -4,11 +4,23 @@ import EventList from "../EventList/EventList.tsx";
 const PaginatedEvents = ({ items, itemsPerPage }) => {
   const { currentItems, currentPage, totalPages, changePage } = usePagination(
     items,
-    itemsPerPage
+    itemsPerPage,
+    10
   );
-
+  console.log(currentItems);
   return (
     <div>
+      {" "}
+      <ul>
+        {Array.isArray(currentItems) &&
+          currentItems.map((eventItem) => {
+            return (
+              <li key={eventItem.id}>
+                <p>{eventItem.title}</p>
+              </li>
+            );
+          })}
+      </ul>
       <EventList filteredEvents={currentItems} />
       <div>
         <button
