@@ -1,11 +1,11 @@
 import usePagination from "../../hooks/usePagination/usePagination.tsx";
 import EventList from "../EventList/EventList.tsx";
 
-const PaginatedEvents = ({ items, itemsPerPage }) => {
+const PaginatedEvents = ({ items, itemsPerPage,totalItems }) => {
   const { currentItems, currentPage, totalPages, changePage } = usePagination(
     items,
     itemsPerPage,
-    10
+   totalItems
   );
   console.log(currentItems);
   return (
@@ -31,7 +31,7 @@ const PaginatedEvents = ({ items, itemsPerPage }) => {
 
         <button
           onClick={() => changePage(currentPage + 1)}
-          disabled={currentPage === totalPages}
+          disabled={currentPage >= totalPages}
         >
           Next
         </button>
