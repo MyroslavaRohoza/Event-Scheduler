@@ -1,9 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { initialState } from "../initialState.ts";
+import { initialState as globalInitialState } from "../initialState.ts";
+import { FilterInitState } from "../../types/eventTypes.ts";
+
+const initialState = globalInitialState.filter as FilterInitState;
 
 const eventsSlice = createSlice({
   name: "filter",
-  initialState: initialState.filter,
+  initialState,
   reducers: {
     filterChange: (state, action: PayloadAction<string>) => {
       state.eventTitle = action.payload;
@@ -18,7 +21,10 @@ const eventsSlice = createSlice({
         endDate: string | null;
       }>
     ) => {
-      state.dateRange = action.payload;
+      state.dateRange = {
+        startDate: action.payload.startDate ?? "",
+        endDate: action.payload.endDate ?? "",
+      };
     },
   },
 });

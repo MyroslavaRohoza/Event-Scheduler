@@ -1,9 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { initialState } from "../initialState";
+import { initialState as globalInitialState } from "../initialState.ts";
+import { PagesInitState } from "../../types/eventTypes.ts";
+
+const initialState = globalInitialState.pages as PagesInitState;
 
 const eventsSlice = createSlice({
   name: "pages",
-  initialState: initialState.pages,
+  initialState,
   reducers: {
     setCurrentPage: (state, action: PayloadAction<number>) => {
       state.currentPage = action.payload;
@@ -11,13 +14,10 @@ const eventsSlice = createSlice({
     setItemsPerPage: (state, action: PayloadAction<number>) => {
       state.itemsPerPage = action.payload;
     },
-    setTotalItems: (state, action: PayloadAction<number>) => {
-      state.totalItems += action.payload;
-    },
   },
 });
 
-export const { setCurrentPage, setItemsPerPage, setTotalItems } =
+export const { setCurrentPage, setItemsPerPage } =
   eventsSlice.actions;
 
 export const pagesReducer = eventsSlice.reducer;

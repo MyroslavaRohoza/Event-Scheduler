@@ -1,8 +1,13 @@
 import usePagination from "../../hooks/usePagination/usePagination.tsx";
+import { PaginatedEventsType } from "../../types/eventTypes.ts";
 import EventList from "../EventList/EventList.tsx";
 import { Button, ButtonGroup, Stack } from "@mui/material";
 
-const PaginatedEvents = ({ items, itemsPerPage, totalItems }) => {
+const PaginatedEvents = ({
+  items,
+  itemsPerPage,
+  totalItems,
+}: PaginatedEventsType) => {
   const { currentItems, currentPage, totalPages, changePage } = usePagination(
     items,
     itemsPerPage,

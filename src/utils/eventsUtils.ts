@@ -1,19 +1,30 @@
 import { AppDispatch } from "../state/store.ts";
+import { Action } from "redux";
+import { FormikHelpers } from "formik";
+import { EventItem } from "../types/eventTypes.ts";
 
 export const handleEventAction = <T>(
   dispatch: AppDispatch,
-  actionCreator: (value: T) => void,
-  value: T
+  actionCreator: (value?: T) => Action,
+  value?: T
 ) => {
-  dispatch(actionCreator(value));
+  if (value) {
+    dispatch(actionCreator(value));
+  } else {
+    dispatch(actionCreator());
+  }
 };
 
-export const handleSubmit = (
-  actions,
-  handleEventAction,
-  dispatch,
-  actionCreator,
-  values
+export const handleSubmit = <T>(
+  actions: FormikHelpers<EventItem>,
+  handleEventAction: (
+    dispatch: AppDispatch,
+    actionCreator: (value: T) => void,
+    value?: T
+  ) => void, 
+  dispatch: AppDispatch,
+  actionCreator: (value: T) => void,
+  values: T
 ) => {
   handleEventAction(dispatch, actionCreator, values);
   actions.resetForm();

@@ -1,14 +1,7 @@
 import { useSelector } from "react-redux";
 import { selectFilteredEvents } from "../../state/filter/filterSelectors.ts";
-import {
-  selectItemPerPage,
-  selectTotalItems,
-} from "../../state/pages/pagesSelectors.ts";
-
-interface PaginatedWithDataProps {
-  items: any[];
-  itemsPerPage: number;
-}
+import { selectItemPerPage } from "../../state/pages/pagesSelectors.ts";
+import { selectEvents } from "../../state/events/eventSelectors.ts";
 
 const PaginatedWithData = <P extends object>(
   WrappedComponent: React.ComponentType<P>
@@ -16,7 +9,7 @@ const PaginatedWithData = <P extends object>(
   const PaginatedComponent = (props: P) => {
     const itemsPerPage = useSelector(selectItemPerPage);
     const items = useSelector(selectFilteredEvents);
-    const totalItems = useSelector(selectTotalItems);
+    const totalItems = useSelector(selectEvents).length;
 
     return (
       <WrappedComponent

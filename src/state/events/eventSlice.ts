@@ -1,10 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { EventItem } from "../../types/eventTypes.ts";
-import { initialState } from "../initialState.ts";
+import { EventInitState, EventItem } from "../../types/eventTypes.ts";
+import { initialState as globalInitialState } from "../initialState.ts";
+
+const initialState = globalInitialState.events as EventInitState;
 
 const eventsSlice = createSlice({
   name: "events",
-  initialState: initialState.events,
+  initialState,
   reducers: {
     addEvent: (state, action: PayloadAction<EventItem>) => {
       const newEvent = action.payload;
@@ -24,14 +26,17 @@ const eventsSlice = createSlice({
       state.error = null;
     },
 
-    deleteEvent: (state, action: PayloadAction<number>) => {
+    deleteEvent: (state, action: PayloadAction<string | undefined>) => {
       state.eventList = state.eventList.filter(
         (event) => event.id !== action.payload
       );
     },
     editEvent: (
       state,
-      action: PayloadAction<{ id: number; updatedEvent: Partial<EventItem> }>
+      action: PayloadAction<{
+        id: number | undefined;
+        updatedEvent: Partial<EventItem>;
+      }>
     ) => {
       const { id, updatedEvent } = action.payload;
       const index = state.eventList.findIndex((event) => event.id === id);
@@ -42,7 +47,7 @@ const eventsSlice = createSlice({
         };
       }
     },
-    turnOnEditEvent: (state,action: PayloadAction<number>) => {
+    turnOnEditEvent: (state, action: PayloadAction<number>) => {
       state.editEventId = action.payload;
     },
     turnOffEditEvent: (state) => {

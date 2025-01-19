@@ -1,4 +1,4 @@
-import { RootState } from "../rootReducer.ts";
+import { RootState } from "../store.ts";
 
 export const selectEvents = (state: RootState) => state.events.eventList;
 
