@@ -2,7 +2,7 @@ import React from "react";
 import {
   Button as MuiButton,
 } from "@mui/material";
-import { CustomButtonProps } from "../../types/eventTypes";
+import { CustomButtonProps } from "../../types/eventTypes.ts";
 
 const Button: React.FC<CustomButtonProps> = ({
   children,

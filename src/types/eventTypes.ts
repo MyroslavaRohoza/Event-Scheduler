@@ -15,7 +15,7 @@ export type EventState = {
 export type EventInitState = {
   eventList: EventItem[];
   error: string | null;
-  editEventId: number | null;
+  editEventId: string | null;
 };
 
 export type FilterInitState = {

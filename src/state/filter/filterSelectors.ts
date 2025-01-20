@@ -1,6 +1,6 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { selectEvents } from "../events/eventSelectors";
-import { RootState } from "../rootReducer";
+import { RootState } from "../store.ts";
 
 export const selectDateRange = (state: RootState) =>
   state.filter.dateRange;

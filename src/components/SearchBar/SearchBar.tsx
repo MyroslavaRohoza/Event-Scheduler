@@ -13,7 +13,7 @@ const SearchBar = () => {
       <TextField
         value={title}
         onChange={(evt) =>
-          handleEventAction(dispatch, filterChange, evt.target.value)
+          handleEventAction(dispatch, filterChange, evt.target.value as string)
         }
         label="Search"
         variant="outlined"

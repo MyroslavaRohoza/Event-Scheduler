@@ -34,7 +34,7 @@ const eventsSlice = createSlice({
     editEvent: (
       state,
       action: PayloadAction<{
-        id: number | undefined;
+        id: string;
         updatedEvent: Partial<EventItem>;
       }>
     ) => {
@@ -47,7 +47,7 @@ const eventsSlice = createSlice({
         };
       }
     },
-    turnOnEditEvent: (state, action: PayloadAction<number>) => {
+    turnOnEditEvent: (state, action: PayloadAction<string>) => {
       state.editEventId = action.payload;
     },
     turnOffEditEvent: (state) => {

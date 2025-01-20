@@ -18,7 +18,11 @@ export const CategoryFilter = () => {
         labelId="category-select-label"
         defaultValue="all"
         onChange={(evt) =>
-          handleEventAction(dispatch, setCategoryFilter, evt.target.value ?? "")
+          handleEventAction(
+            dispatch,
+            setCategoryFilter,
+            evt.target.value as string
+          )
         }
         label="Category"
         sx={{
