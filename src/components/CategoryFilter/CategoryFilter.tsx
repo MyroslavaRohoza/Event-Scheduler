@@ -11,14 +11,14 @@ export const CategoryFilter = () => {
     <FormControl
       variant="outlined"
       fullWidth
-      sx={{ width: "30%", marginBottom: 2, marginTop: "50px" }}
+      sx={{ width: "200px", marginBottom: 2, marginTop: "50px" }}
     >
       <InputLabel id="category-select-label">Category</InputLabel>
       <Select
         labelId="category-select-label"
         defaultValue="all"
         onChange={(evt) =>
-         handleEventAction(dispatch, setCategoryFilter, evt.target.value ?? "")
+          handleEventAction(dispatch, setCategoryFilter, evt.target.value ?? "")
         }
         label="Category"
         sx={{

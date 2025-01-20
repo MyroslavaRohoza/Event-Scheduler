@@ -1,12 +1,16 @@
+import React from "react";
 import { useSelector } from "react-redux";
 import { selectFilteredEvents } from "../../state/filter/filterSelectors.ts";
 import { selectItemPerPage } from "../../state/pages/pagesSelectors.ts";
 import { selectEvents } from "../../state/events/eventSelectors.ts";
+import {  EventState, PagesInitState } from "../../types/eventTypes.ts";
 
-const PaginatedWithData = <P extends object>(
-  WrappedComponent: React.ComponentType<P>
+export type PaginatedProps = Pick<EventState, "items"> & Pick<PagesInitState, "itemsPerPage" | "totalItems">;
+
+const PaginatedWithData = (
+  WrappedComponent: React.ComponentType<PaginatedProps>
 ) => {
-  const PaginatedComponent = (props: P) => {
+  const PaginatedComponent = (props: Omit<PaginatedProps, keyof PaginatedProps>) => {
     const itemsPerPage = useSelector(selectItemPerPage);
     const items = useSelector(selectFilteredEvents);
     const totalItems = useSelector(selectEvents).length;
@@ -25,3 +29,4 @@ const PaginatedWithData = <P extends object>(
 };
 
 export default PaginatedWithData;
+

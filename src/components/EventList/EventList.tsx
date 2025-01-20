@@ -1,7 +1,13 @@
+import React from "react";
+import { EventItem } from "../../types/eventTypes.ts";
 import EventListItem from "../EventListItem/EventListItem.tsx";
-import css from './eventList.module.css'
+import css from "./eventList.module.css";
 
-const EventList = ({ filteredEvents }) => {
+type EventListProps = {
+  filteredEvents: EventItem[];
+};
+
+const EventList: React.FC<EventListProps> = ({ filteredEvents }) => {
   return (
     <ul className={css.eventList}>
       {Array.isArray(filteredEvents) && filteredEvents.length === 0 && (

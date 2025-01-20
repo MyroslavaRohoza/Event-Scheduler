@@ -17,7 +17,6 @@ const eventsSlice = createSlice({
   },
 });
 
-export const { setCurrentPage, setItemsPerPage } =
-  eventsSlice.actions;
+export const { setCurrentPage, setItemsPerPage } = eventsSlice.actions;
 
 export const pagesReducer = eventsSlice.reducer;

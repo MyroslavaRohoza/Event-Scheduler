@@ -38,6 +38,7 @@ const EventFilter = () => {
               borderRadius: "8px",
             },
             marginBottom: 2,
+            width: "200px",
           }}
         />
         <TextField
@@ -55,6 +56,7 @@ const EventFilter = () => {
               borderRadius: "8px",
             },
             marginBottom: 2,
+            width: "200px",
           }}
         />
       </Stack>

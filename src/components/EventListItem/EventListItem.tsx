@@ -22,7 +22,10 @@ const EventListItem = ({
   const dispatch = useDispatch();
 
   const editingEventId = useSelector(selectEditEventId);
-  const isEditEvent = editingEventId === id;
+  const isEditEvent =
+    editingEventId !== null &&
+    id !== undefined &&
+    editingEventId.toString() === id.toString();
 
   const initialValues = {
     title: title || "",
@@ -65,7 +68,6 @@ const EventListItem = ({
               },
             }}
           />
-
           <label htmlFor="category">
             <strong>Category:</strong>
             <Field
@@ -89,12 +91,13 @@ const EventListItem = ({
               ))}
             </Field>
           </label>
-          <label htmlFor="date">
-            <strong>Date:</strong>
+
+          <label htmlFor="time">
+            <strong>Time:</strong>
             <Field
-              type="date"
-              id="date"
-              name="date"
+              type="time"
+              id="time"
+              name="time"
               required
               as={TextField}
               variant="outlined"
@@ -108,12 +111,12 @@ const EventListItem = ({
               }}
             />
           </label>
-          <label htmlFor="time">
-            <strong>Time:</strong>
+          <label htmlFor="date">
+            <strong>Date:</strong>
             <Field
-              type="time"
-              id="time"
-              name="time"
+              type="date"
+              id="date"
+              name="date"
               required
               as={TextField}
               variant="outlined"
@@ -145,7 +148,7 @@ const EventListItem = ({
               }}
             />
           </label>
-          <Button buttonType="submit">Save</Button>
+          <Button type="submit">Save</Button>
         </Form>
       </Formik>
     </li>
@@ -158,10 +161,10 @@ const EventListItem = ({
         <strong>Category:</strong> {category}
       </p>
       <p>
-        <strong>Date:</strong> <time dateTime={date}>{date}</time>
+        <strong>Time:</strong> <time>{time}</time>
       </p>
       <p>
-        <strong>Time:</strong> <time>{time}</time>
+        <strong>Date:</strong> <time dateTime={date}>{date}</time>
       </p>
       <p>{description}</p>
       <div className={css.buttonContainer}>

@@ -17,7 +17,7 @@ const SearchBar = () => {
         }
         label="Search"
         variant="outlined"
-        sx={{ width: "40%" }}
+        sx={{ width: "300px" }}
       />
     </div>
   );
