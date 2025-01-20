@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { handleEventAction } from "../../utils/eventsUtils.ts";
 import { selectDateRange } from "../../state/filter/filterSelectors.ts";
 import { setDateFilter } from "../../state/filter/filterSlice.ts";
-import { TextField, Stack, Typography } from "@mui/material";
+import { TextField, Stack } from "@mui/material";
 
 const EventFilter = () => {
   const dispatch = useDispatch();
